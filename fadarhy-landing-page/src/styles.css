@@ -1,0 +1,305 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+/* Brand tokens live in their own file — rebrand edits theme.css, never this one. */
+@import "./theme.css";
+
+@custom-variant dark (&:is([data-theme="dark"] *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink-muted: var(--ink-muted);
+  --color-rhine-blue: var(--rhine-blue);
+  --color-rhine-blue-soft: var(--rhine-blue-soft);
+  --color-on-rhine-blue: var(--on-rhine-blue);
+  --color-link: var(--link);
+  --color-focus-ring: var(--focus-ring);
+  --color-thread-lime: var(--thread-lime);
+  --color-on-thread-lime: var(--on-thread-lime);
+  --color-night: var(--night);
+  --color-mist: var(--mist);
+  --color-error: var(--error);
+  --color-error-soft: var(--error-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  /* Design-preview class aliases: a picked preview's font-display / font-body /
+     text-ink keep working in the build. No --color-base: it would collide
+     with the text-base font size. */
+  --font-display: var(--font-serif);
+  --font-body: var(--font-sans);
+  --color-ink: var(--ink);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] [class*="shadow-"] {
+  box-shadow: none !important;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Display typography ───────────────────────────────────────── */
+
+/* Component defaults yield to explicit Tailwind utilities. */
+@layer components {
+.display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: var(--display-tracking, -0.015em);
+  line-height: 1.04;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--eyebrow-tracking, 0.18em);
+  text-transform: var(--eyebrow-transform, uppercase);
+  color: var(--color-muted-foreground);
+}
+
+/* Character-driven surfaces — components use these instead of hardwiring
+   border width / padding / radius / shadow, so a world shifts all of them at
+   once. Colour still comes from the palette tokens. */
+.card-surface {
+  border: var(--frame-border-width, 1px) solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--card-pad, 1.5rem);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card, none);
+}
+.btn-shape {
+  border-radius: var(--btn-radius, var(--radius));
+  border-width: var(--btn-border-width, 1px);
+}
+
+.lede {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-muted-foreground);
+}
+
+.dropcap::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 4.5em;
+  line-height: 0.86;
+  padding: 0.05em 0.1em 0 0;
+  font-weight: 400;
+}
+}
+
+/* Reveal primitives — paired with FadeUp / RevealLines React
+   components in src/components. The React side toggles the .in
+   class on the element via IntersectionObserver; the CSS does the
+   actual easing. Cheap, no JS per frame, no hydration mismatch. */
+
+.fade-up {
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+/* The hidden start state is OPT-IN: FadeUp / RevealLines add `js-anim` to
+   <html> the instant their effect runs, so content is fully visible until JS
+   is live and only then animates on scroll. This is what stops the pod's slow
+   first client-compile from leaving the page's middle blank for 10-20s behind
+   the SSR'd nav/footer — a cold/slow bundle simply shows the content. */
+.js-anim .fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.js-anim .fade-up.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-line {
+  display: block;
+  overflow: hidden;
+}
+.reveal-line > span {
+  display: block;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+.js-anim .reveal-line > span {
+  transform: translateY(110%);
+}
+.js-anim .reveal-line.in > span {
+  transform: translateY(0);
+}
+
+/* ── Image treatments ─────────────────────────────────────────── */
+
+.kenburns {
+  animation: kenburns 18s ease-out infinite alternate;
+}
+@keyframes kenburns {
+  0% { transform: scale(1) translate3d(0, 0, 0); }
+  100% { transform: scale(1.08) translate3d(-1%, -1%, 0); }
+}
+
+.img-hover {
+  overflow: hidden;
+}
+.img-hover img {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-hover:hover img {
+  transform: scale(1.04);
+}
+
+/* ── Inline link underline ────────────────────────────────────── */
+
+.link-line {
+  position: relative;
+  text-decoration: none;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ── Page-transition mask + custom cursor ─────────────────────── */
+
+.page-mask {
+  position: fixed;
+  inset: 0;
+  background: var(--color-foreground);
+  z-index: 9999;
+  pointer-events: none;
+  transform-origin: top;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-foreground);
+}
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-foreground);
+  border-radius: 50%;
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Lenis smooth scroll hooks ─────────────────────────────────
+   The SmoothScroll component instantiates Lenis on mount; these
+   classes coordinate the wheel/scrollbar handover.
+   ──────────────────────────────────────────────────────────── */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 6.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .js-anim .fade-up,
+  .js-anim .reveal-line > span,
+  .page-transition {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .kenburns { animation: none; }
+  .img-hover img, .link-line::after { transition: none; }
+  .img-hover:hover img { transform: none; }
+  .cursor-dot, .cursor-ring, .page-mask { display: none; }
+}
+
+@keyframes need-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.need-progress {
+  animation: need-progress 6s linear forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .need-progress { animation: none; width: 100%; }
+}

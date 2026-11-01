@@ -1,0 +1,99 @@
+/* src/theme.css — the brand. Rebrand = edit THIS file only.
+   Fonts: Google Fonts load from the stylesheet link in src/routes/__root.tsx
+   head() links. Change the families there and point the --font-* vars here
+   at the same names (there is no index.html under TanStack Start).
+   styles.css owns layout/utilities and must not be rewritten for a rebrand.
+   Every colour is a token: light on :root, dark on [data-theme="dark"]. */
+
+:root {
+  color-scheme: light;
+  --radius: 0.5rem;
+
+  --frame-border-width: 1px;
+  --section-pad: 6rem;
+  --card-pad: 1.5rem;
+  --eyebrow-tracking: 0.18em;
+  --eyebrow-transform: uppercase;
+  --btn-radius: var(--radius);
+  --btn-border-width: 1px;
+  --shadow-card: none;
+  --display-tracking: -0.015em;
+
+  /* FadäRhy design-system tokens */
+  --background: #F2F2F2;
+  --surface: #FFFFFF;
+  --line: #E4E4EA;
+  --line-strong: #6B6B76;
+  --ink: #111111;
+  --ink-muted: #5C5C66;
+  --rhine-blue: #2446F5;
+  --rhine-blue-soft: #DCE4FE;
+  --on-rhine-blue: #FFFFFF;
+  --link: #2446F5;
+  --focus-ring: #2446F5;
+
+  --error: #B42318;
+  --error-soft: #FDECEA;
+  --success: #1A7F4B;
+  --success-soft: #E6F4EC;
+  --warning: #8A5A00;
+  --warning-soft: #FFF3D6;
+  --info: #0B5ED7;
+  --info-soft: #E3EEFF;
+
+  /* Fixed brand tokens (same in both themes) */
+  --thread-lime: #D6FF3F;
+  --on-thread-lime: #11120F;
+  --night: #11120F;
+  --mist: #EEF0E8;
+
+  /* shadcn names → design-system tokens */
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--rhine-blue);
+  --primary-foreground: var(--on-rhine-blue);
+  --secondary: var(--background);
+  --secondary-foreground: var(--ink);
+  --muted: var(--background);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--background);
+  --accent-foreground: var(--ink);
+  --destructive: var(--error);
+  --destructive-foreground: #FFFFFF;
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--focus-ring);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #11120F;
+  --surface: #1C1D19;
+  --line: #2E3029;
+  --line-strong: #7B8073;
+  --ink: #EEF0E8;
+  --ink-muted: #A8AD9F;
+  --rhine-blue: #D6FF3F;
+  --rhine-blue-soft: #2A3308;
+  --on-rhine-blue: #11120F;
+  --link: #D6FF3F;
+  --focus-ring: #D6FF3F;
+
+  --error: #FF8A80;
+  --error-soft: #3A1613;
+  --success: #6FD39A;
+  --success-soft: #11301F;
+  --warning: #F2C14E;
+  --warning-soft: #33280A;
+  --info: #8FB0FF;
+  --info-soft: #112A66;
+
+  --destructive-foreground: #11120F;
+}

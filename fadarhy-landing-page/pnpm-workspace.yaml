@@ -1,0 +1,21 @@
+# pnpm settings for this project (pnpm 10).
+# Only install versions that have been published for at least a day.
+minimumReleaseAge: 1440
+# Install native binaries for the machine running pnpm only.
+supportedArchitectures:
+  os:
+    - current
+  cpu:
+    - current
+  libc:
+    - current
+# Dependencies allowed to run install scripts.
+onlyBuiltDependencies:
+  - "@prisma/client"
+  - "@prisma/engines"
+  - "@swc/core"
+  - bcrypt
+  - better-sqlite3
+  - esbuild
+  - prisma
+  - sharp
