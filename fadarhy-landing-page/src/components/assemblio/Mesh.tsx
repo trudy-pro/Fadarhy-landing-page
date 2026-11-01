@@ -66,21 +66,21 @@ export function MeshCard() {
               ))}
             </svg>
 
-            <div className="absolute left-[180px] top-[150px] z-10 flex h-[110px] w-[120px] flex-col items-center justify-center rounded-xl border-[1.5px] border-rhine-blue bg-surface shadow-lg">
+            <div className="absolute left-[180px] top-[150px] z-10 flex h-[110px] w-[120px] flex-col items-center justify-center rounded-card border-[1.5px] border-rhine-blue bg-surface shadow-lg">
               <Zap className="size-5 text-link" aria-hidden />
               <span className="mt-1.5 text-[15px] font-semibold text-ink">FadäRhy</span>
-              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-ink-muted">Core router</span>
-              <span className="mt-1.5 flex items-center gap-1.5 font-mono text-[10px] font-medium text-link">
+              <span className="text-[9px] uppercase tracking-[0.12em] text-ink-muted">Core router</span>
+              <span className="mt-1.5 flex items-center gap-1.5 text-[10px] font-medium text-link">
                 <span className="size-1.5 rounded-full bg-rhine-blue" /> Active
               </span>
             </div>
 
             {nodes.map(({ left, top, title, sub, Icon }) => (
-              <div key={title} style={{ left, top }} className="absolute z-10 flex h-[46px] w-[150px] items-center gap-2 rounded-xl border border-line bg-surface px-2.5 shadow-sm">
-                <Icon className="size-4 shrink-0 text-ink-muted" aria-hidden />
+              <div key={title} style={{ left, top }} className="absolute z-10 flex h-[46px] w-[150px] items-center gap-2 rounded-card border border-line bg-surface px-2.5 shadow-sm">
+                <Icon className="size-4 shrink-0 text-link" aria-hidden />
                 <div className="min-w-0">
                   <p className="truncate text-[12px] font-semibold leading-tight text-ink">{title}</p>
-                  <p className="truncate font-mono text-[9.5px] leading-tight text-ink-muted">{sub}</p>
+                  <p className="truncate text-[9.5px] leading-tight text-ink-muted">{sub}</p>
                 </div>
               </div>
             ))}
@@ -96,7 +96,7 @@ export function StatsCard() {
             {stats.map((s) => (
               <div key={s.n} className="border-b border-line py-4">
                 <CountUp value={s.n} />
-                <p className="mt-2 text-[16px] text-ink-muted">{s.t}</p>
+                <p className="mt-2 md-body-large text-ink-muted">{s.t}</p>
               </div>
             ))}
           </div>

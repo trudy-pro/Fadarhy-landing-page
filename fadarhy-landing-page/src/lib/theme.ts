@@ -8,7 +8,7 @@ export function getChoice(): ThemeChoice {
   } catch {
     /* storage unavailable */
   }
-  return "system";
+  return "light";
 }
 
 function systemDark(): boolean {
@@ -31,4 +31,4 @@ export function setChoice(choice: ThemeChoice) {
 }
 
 /** Runs before first paint. Kept as a string so it can be inlined in <head>. */
-export const themeInitScript = `(function(){try{var c=null;try{c=localStorage.getItem("${THEME_KEY}")}catch(e){}var d=c==="dark"||((c!=="light")&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.setAttribute("data-theme",d?"dark":"light")}catch(e){}})();`;
+export const themeInitScript = `(function(){try{var c=null;try{c=localStorage.getItem("${THEME_KEY}")}catch(e){}var d=c==="dark"||(c==="system"&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.setAttribute("data-theme",d?"dark":"light")}catch(e){}})();`;

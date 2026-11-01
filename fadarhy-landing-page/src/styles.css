@@ -4,6 +4,164 @@
 /* Brand tokens live in their own file — rebrand edits theme.css, never this one. */
 @import "./theme.css";
 
+@font-face {
+  font-family: "Neue Frutiger";
+  src: url("/fonts/FrutigerNeueLTPro-Light.otf") format("opentype");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Frutiger";
+  src: url("/fonts/FrutigerNeueLTPro-Book.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Frutiger";
+  src: url("/fonts/FrutigerNeueLTPro-BookIt.otf") format("opentype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Frutiger";
+  src: url("/fonts/FrutigerNeueLTPro-Md.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Frutiger";
+  src: url("/fonts/FrutigerNeueLTPro-Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Frutiger";
+  src: url("/fonts/FrutigerNeueLTPro-BoldIt.otf") format("opentype");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Frutiger";
+  src: url("/fonts/FrutigerNeueLTPro-Hv.otf") format("opentype");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Frutiger";
+  src: url("/fonts/FrutigerNeueLTPro-XBlk.otf") format("opentype");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+/* Material Design 3 type scale — size / line-height / tracking / weight per
+   m3.material.io/styles/typography/type-scale-tokens. Font stays Neue Frutiger.
+   Subheading styles (Headline Small, Title) run at 500 with tighter tracking. */
+@utility md-display-large {
+  font-size: 3.5625rem;
+  line-height: 4rem;
+  letter-spacing: -0.25px;
+  font-weight: 400;
+}
+@utility md-display-medium {
+  font-size: 2.8125rem;
+  line-height: 3.25rem;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+@utility md-display-small {
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+@utility md-headline-large {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+@utility md-headline-medium {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+@utility md-headline-small {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+@utility md-title-large {
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+@utility md-title-medium {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+@utility md-title-small {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+@utility md-body-large {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+}
+@utility md-body-medium {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+}
+@utility md-body-small {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+}
+@utility md-label-large {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.5px;
+  font-weight: 500;
+}
+@utility md-label-medium {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: -0.5px;
+  font-weight: 500;
+}
+@utility md-label-small {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: -0.5px;
+  font-weight: 500;
+}
+
 @custom-variant dark (&:is([data-theme="dark"] *));
 
 @theme inline {
@@ -11,6 +169,10 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-btn: var(--btn-radius);
+  --radius-chip: var(--chip-radius);
+  --radius-badge: var(--badge-radius);
+  --radius-card: var(--card-radius);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -82,6 +244,9 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: -0.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -92,9 +257,9 @@ body {
 @layer components {
 .display {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: var(--display-tracking, -0.015em);
-  line-height: 1.04;
+  line-height: 1.08;
 }
 
 .eyebrow {
@@ -122,7 +287,7 @@ body {
 
 .lede {
   font-size: 1.125rem;
-  line-height: 1.6;
+  line-height: 1.4;
   color: var(--color-muted-foreground);
 }
 

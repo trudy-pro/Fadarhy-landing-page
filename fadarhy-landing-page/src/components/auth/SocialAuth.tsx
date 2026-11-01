@@ -138,7 +138,7 @@ export function SocialAuth({ providers: given, divider = "top" }: SocialAuthProp
           <button
             key={p}
             type="button"
-            className="inline-flex h-11 w-full cursor-pointer appearance-none items-center justify-center gap-2.5 whitespace-nowrap rounded-[var(--btn-radius,var(--radius,0.5rem))] border border-input bg-background px-4 text-sm font-medium text-foreground transition-colors [font-family:inherit] hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-60"
+            className="inline-flex h-11 w-full cursor-pointer appearance-none items-center justify-center gap-2.5 whitespace-nowrap rounded-btn border border-input bg-background px-4 text-sm font-medium text-foreground transition-colors [font-family:inherit] hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-60"
             onClick={() => onSignIn(p)}
             disabled={pending !== null}
             aria-busy={pending === p}

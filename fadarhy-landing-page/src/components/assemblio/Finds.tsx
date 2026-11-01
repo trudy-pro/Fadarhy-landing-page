@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { FadeUp } from "@/components/Reveal";
 import { Coins, FlaskConical, Lightbulb, MapPin, TrendingUp, Check, Mail, Search, Loader, CalendarCheck } from "lucide-react";
 
 type Need = {
@@ -43,22 +44,24 @@ const needs: Need[] = [
     plan: [["Prepare the data room", "Month 1"], ["Investor introductions", "Month 2–4"]] },
 ];
 
-const card = "absolute rounded-[28px] border-2 border-line bg-surface";
-const pill = "absolute flex items-center gap-1.5 rounded-xl border border-line bg-surface px-3 py-2 text-[13px] text-ink-muted shadow-sm";
-const tile = "grid size-10 shrink-0 place-items-center rounded-lg bg-background text-ink";
+const card = "rounded-card border-2 border-line bg-surface";
+const pill = "flex items-center gap-1.5 rounded-chip border border-line bg-surface px-3 py-2 text-[13px] text-ink-muted shadow-sm";
+const tile = "grid size-10 shrink-0 place-items-center rounded-badge bg-background text-ink-muted";
 
-function Flow({ n }: { n: Need }) {
+function Flow({ n, stacked = false }: { n: Need; stacked?: boolean }) {
+  // Stacked: same cards in a single column for narrow screens, no connectors.
+  const at = (pos: string) => (stacked ? "relative self-center" : `absolute ${pos}`);
   return (
-    <div className="relative h-[760px] w-[960px]">
-      <svg aria-hidden className="absolute inset-0" width="960" height="760" fill="none">
+    <div className={stacked ? "flex flex-col gap-3" : "relative h-[760px] w-[960px]"}>
+      <svg aria-hidden className={stacked ? "hidden" : "absolute inset-0"} width="960" height="760" fill="none">
         <path d="M350 120H265Q250 120 250 135V290" className="stroke-line" strokeWidth="2" />
         <path d="M380 400H580" className="stroke-line" strokeWidth="2" />
         <path d="M920 390H940Q955 390 955 405V595Q955 610 940 610H720" className="stroke-rhine-blue" strokeWidth="2" />
       </svg>
 
-      <div className={`${card} left-[350px] top-[20px] w-[320px] p-6`}>
+      <div className={`${card} ${stacked ? "relative w-full p-5" : "absolute left-[350px] top-[20px] w-[320px] p-6"}`}>
         <div className="flex items-center gap-3">
-          <span className={tile}><Mail className="size-4" aria-hidden /></span>
+          <span className={tile}><Mail className="size-4 text-link" aria-hidden /></span>
           <div>
             <p className="text-[17px] font-semibold leading-tight">Your story</p>
             <p className="text-[13px] text-ink-muted">Written in {n.lang}</p>
@@ -66,11 +69,11 @@ function Flow({ n }: { n: Need }) {
         </div>
         <p className="mt-3 rounded-lg bg-background p-3 text-[14px] leading-snug">“{n.story}”</p>
       </div>
-      <div className={`${pill} left-[180px] top-[170px]`}><Search className="size-3.5" aria-hidden />Understanding…</div>
+      <div className={`${pill} ${at("left-[180px] top-[170px]")}`}><Search className="size-3.5 text-link" aria-hidden />Understanding…</div>
 
-      <div className={`${card} left-[40px] top-[290px] w-[340px] p-6`}>
+      <div className={`${card} ${stacked ? "relative w-full p-5" : "absolute left-[40px] top-[290px] w-[340px] p-6"}`}>
         <div className="mb-3 flex items-center gap-3">
-          <span className={tile}><Check className="size-4" aria-hidden /></span>
+          <span className={tile}><Check className="size-4 text-link" aria-hidden /></span>
           <p className="text-[17px] font-semibold">Your profile</p>
         </div>
         {n.profile.map(([k, v]) => (
@@ -79,11 +82,11 @@ function Flow({ n }: { n: Need }) {
           </div>
         ))}
       </div>
-      <div className={`${pill} left-[425px] top-[378px]`}><Loader className="size-3.5" aria-hidden />Matching…</div>
+      <div className={`${pill} ${at("left-[425px] top-[378px]")}`}><Loader className="size-3.5 text-link" aria-hidden />Matching…</div>
 
-      <div className={`${card} left-[580px] top-[300px] w-[340px] p-6`}>
+      <div className={`${card} ${stacked ? "relative w-full p-5" : "absolute left-[580px] top-[300px] w-[340px] p-6"}`}>
         <div className="flex items-center gap-3">
-          <span className={`${tile} font-mono text-[12px] font-medium`}>#1</span>
+          <span className={`${tile} text-[12px] font-medium`}>#1</span>
           <div>
             <p className="text-[16px] font-semibold leading-tight">{n.match}</p>
             <p className="text-[12px] text-ink-muted">{n.type}</p>
@@ -92,20 +95,20 @@ function Flow({ n }: { n: Need }) {
         <p className="mt-3 text-[13px] leading-snug text-ink-muted"><b className="font-medium text-ink">Why:</b> {n.why}</p>
         <p className="mt-2 text-[12px] text-link">Source: {n.source}</p>
       </div>
-      <div className={`${pill} left-[775px] top-[590px]`}><CalendarCheck className="size-3.5" aria-hidden />Planning…</div>
+      <div className={`${pill} ${at("left-[775px] top-[590px]")}`}><CalendarCheck className="size-3.5 text-link" aria-hidden />Planning…</div>
 
-      <div className={`${card} left-[360px] top-[500px] w-[360px] p-6`}>
+      <div className={`${card} ${stacked ? "relative w-full p-5" : "absolute left-[360px] top-[500px] w-[360px] p-6"}`}>
         <div className="mb-2 flex items-center gap-3">
-          <span className={tile}><CalendarCheck className="size-4" aria-hidden /></span>
+          <span className={tile}><CalendarCheck className="size-4 text-link" aria-hidden /></span>
           <p className="text-[17px] font-semibold">12-month plan</p>
         </div>
         {n.plan.map(([t, m]) => (
           <div key={t} className="flex justify-between border-t border-line py-2 text-[13px]">
-            <span>{t}</span><span className="font-mono text-[11px] text-ink-muted">{m}</span>
+            <span>{t}</span><span className="text-[11px] text-ink-muted">{m}</span>
           </div>
         ))}
-        <div className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-rhine-blue py-3 text-[13px] text-on-rhine-blue">
-          <span className="grid size-5 place-items-center rounded-full bg-on-rhine-blue/20 text-on-rhine-blue"><Check className="size-3" aria-hidden /></span>
+        <div className="mt-3 flex items-center justify-center gap-2 rounded-card bg-rhine-blue-soft py-3 text-[13px] text-link">
+          <span className="grid size-5 place-items-center rounded-full bg-rhine-blue text-on-rhine-blue"><Check className="size-3" aria-hidden /></span>
           3 intro emails drafted · Waiting for you
         </div>
       </div>
@@ -156,13 +159,13 @@ export function Finds() {
   return (
     <section id="finds" className="bg-background px-3 py-8 sm:px-6 lg:py-12">
       <div className="mx-auto max-w-[1180px]">
-        <div className="mb-6 max-w-3xl px-1">
-          <p className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-link">What it finds for you</p>
-          <h2 className="mt-3 text-[26px] font-semibold leading-[1.15] tracking-[-0.02em] text-ink lg:text-[34px]">One continuous thread, whatever you need.</h2>
-          <p className="mt-3 text-[16px] text-ink-muted">Pick a situation and follow it from your words to a plan.</p>
-        </div>
+        <FadeUp className="mb-6 max-w-3xl px-1">
+          <p className="text-[12px] font-medium uppercase tracking-[0.08em] text-link">What it finds for you</p>
+          <h2 className="mt-3 md-headline-medium font-medium! tracking-[-0.02em]! text-ink lg:md-headline-large">One continuous thread, whatever you need.</h2>
+          <p className="mt-3 md-body-large text-ink-muted">Pick a situation and follow it from your words to a plan.</p>
+        </FadeUp>
 
-        <div className="flex flex-wrap items-stretch gap-6 rounded-[28px] bg-surface p-4 sm:p-5 lg:flex-nowrap lg:gap-10 lg:p-5">
+        <FadeUp delay={100} className="flex flex-wrap items-stretch gap-6 rounded-card bg-surface p-4 sm:p-5 lg:flex-nowrap lg:gap-10 lg:p-5">
           <div className="flex w-full flex-col justify-center lg:w-[31%] lg:shrink-0 lg:py-4 lg:pl-5">
             <ul>
               {needs.map((x, i) => {
@@ -173,15 +176,15 @@ export function Finds() {
                     {isActive ? (
                       <div className="py-5">
                         <div className="flex items-center gap-4">
-                          <span className="grid size-14 place-items-center rounded-2xl bg-rhine-blue text-on-rhine-blue"><Icon className="size-6" aria-hidden /></span>
-                          <span className="text-[22px] font-medium">{x.label}</span>
+                          <span className="grid size-14 place-items-center rounded-badge bg-rhine-blue text-on-rhine-blue"><Icon className="size-6" aria-hidden /></span>
+                          <span className="md-title-large">{x.label}</span>
                         </div>
-                        <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">{x.desc}</p>
+                        <p className="mt-4 md-body-large text-ink-muted">{x.desc}</p>
                         <div className="mt-6 h-[3px] rounded bg-line"><div key={active} className="need-progress h-full rounded bg-rhine-blue" /></div>
                       </div>
                     ) : (
                       <button type="button" aria-expanded={false} onClick={() => setActive(i)} className="flex w-full items-center gap-4 py-4 text-left">
-                        <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-background text-ink"><Icon className="size-5" aria-hidden /></span>
+                        <span className="grid size-11 shrink-0 place-items-center rounded-badge bg-background text-ink-muted"><Icon className="size-5 text-link" aria-hidden /></span>
                         <span className="text-[18px] text-ink-muted">{x.label}</span>
                       </button>
                     )}
@@ -190,10 +193,11 @@ export function Finds() {
               })}
             </ul>
           </div>
-          <div className="flex min-w-0 flex-1 items-center rounded-[24px] bg-background p-3 sm:p-5">
-            <FitFlow n={n} />
+          <div className="flex min-w-0 flex-1 items-center rounded-card bg-background p-3 sm:p-5">
+            <div className="w-full sm:hidden"><Flow n={n} stacked /></div>
+            <div className="hidden w-full sm:block"><FitFlow n={n} /></div>
           </div>
-        </div>
+        </FadeUp>
       </div>
     </section>
   );

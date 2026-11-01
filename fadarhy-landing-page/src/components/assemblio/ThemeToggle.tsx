@@ -29,9 +29,9 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       onClick={() => setChoice(dark ? "light" : "dark")}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
       title={dark ? "Switch to light mode" : "Switch to dark mode"}
-      className={`inline-grid size-10 place-items-center rounded-xl bg-line text-ink transition-colors hover:brightness-95 ${className}`}
+      className={`inline-grid size-10 place-items-center rounded-btn bg-line text-ink transition-colors hover:brightness-95 ${className}`}
     >
-      {dark ? <Sun className="size-5" aria-hidden="true" /> : <Moon className="size-5" aria-hidden="true" />}
+      {dark ? <Sun className="size-5 text-link" aria-hidden="true" /> : <Moon className="size-5 text-link" aria-hidden="true" />}
     </button>
   );
 }

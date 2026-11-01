@@ -87,7 +87,7 @@ function onAuthRoute(pathname: string): boolean {
 }
 
 const RADIUS = "rounded-[var(--radius,0.5rem)]";
-const BTN_RADIUS = "rounded-[var(--btn-radius,var(--radius,0.5rem))]";
+const BTN_RADIUS = "rounded-btn";
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 const FIELD =
   "h-11 w-full appearance-none border border-input bg-background px-3 text-base text-foreground " + RADIUS + " " +

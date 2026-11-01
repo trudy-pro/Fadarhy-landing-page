@@ -17,19 +17,19 @@ export function Faq() {
   return (
     <section id="faq" className="bg-background px-4 py-20 lg:py-28">
       <FadeUp className="mx-auto max-w-[820px] px-1 text-center">
-        <p className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-link">FAQ</p>
-        <h2 className="mt-3 text-[26px] font-semibold leading-[1.15] tracking-[-0.02em] text-ink lg:text-[34px]">FadäRhy FAQs</h2>
+        <p className="text-[12px] font-medium uppercase tracking-[0.08em] text-link">FAQ</p>
+        <h2 className="mt-3 md-headline-medium font-medium! tracking-[-0.02em]! text-ink lg:md-headline-large">FadäRhy FAQs</h2>
         <Accordion type="single" collapsible className="mt-8 text-left">
           {faqs.map((f, i) => (
             <AccordionItem key={f.q} value={`q${i}`} className="border-0">
-              <AccordionTrigger className="py-[26px] text-left text-[19px] font-medium hover:no-underline">{f.q}</AccordionTrigger>
-              <AccordionContent className="pb-6 text-[17px] leading-relaxed text-ink-muted">{f.a}</AccordionContent>
+              <AccordionTrigger className="py-6 text-left md-title-large text-[20px]! hover:no-underline">{f.q}</AccordionTrigger>
+              <AccordionContent className="pb-6 md-body-large text-ink-muted">{f.a}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
-        <p className="mt-16 text-center text-[17px] text-ink-muted">
+        <p className="mt-16 text-center md-body-large text-ink-muted">
           Didn't find what you were looking for?{" "}
-          <a href="#pilot" className="text-link underline underline-offset-4">Ask us about a pilot</a>
+          <a href="mailto:hallo@fadarhy.ch?subject=Pilot%20enquiry%20for%20Fad%C3%A4Rhy" className="text-link underline underline-offset-4">Ask us about a pilot</a>
         </p>
       </FadeUp>
     </section>
