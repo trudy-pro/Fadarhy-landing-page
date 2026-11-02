@@ -44,9 +44,9 @@ const needs: Need[] = [
     plan: [["Prepare the data room", "Month 1"], ["Investor introductions", "Month 2–4"]] },
 ];
 
-const card = "rounded-card border-2 border-line bg-surface";
-const pill = "flex items-center gap-1.5 rounded-chip border border-line bg-surface px-3 py-2 text-[13px] text-ink-muted shadow-sm";
-const tile = "grid size-10 shrink-0 place-items-center rounded-badge bg-background text-ink-muted";
+const card = "surface-card";
+const pill = "flex items-center gap-1.5 rounded-chip border border-line bg-card px-3 py-2 text-[13px] text-ink-muted shadow-sm";
+const tile = "icon-tile";
 
 function Flow({ n, stacked = false }: { n: Need; stacked?: boolean }) {
   // Stacked: same cards in a single column for narrow screens, no connectors.
@@ -61,19 +61,19 @@ function Flow({ n, stacked = false }: { n: Need; stacked?: boolean }) {
 
       <div className={`${card} ${stacked ? "relative w-full p-5" : "absolute left-[350px] top-[20px] w-[320px] p-6"}`}>
         <div className="flex items-center gap-3">
-          <span className={tile}><Mail className="size-4 text-link" aria-hidden /></span>
+          <span className={tile}><Mail aria-hidden /></span>
           <div>
             <p className="text-[17px] font-semibold leading-tight">Your story</p>
             <p className="text-[13px] text-ink-muted">Written in {n.lang}</p>
           </div>
         </div>
-        <p className="mt-3 rounded-lg bg-background p-3 text-[14px] leading-snug">“{n.story}”</p>
+        <p className="mt-3 rounded-lg bg-section p-3 text-[14px] leading-snug">“{n.story}”</p>
       </div>
       <div className={`${pill} ${at("left-[180px] top-[170px]")}`}><Search className="size-3.5 text-link" aria-hidden />Understanding…</div>
 
       <div className={`${card} ${stacked ? "relative w-full p-5" : "absolute left-[40px] top-[290px] w-[340px] p-6"}`}>
         <div className="mb-3 flex items-center gap-3">
-          <span className={tile}><Check className="size-4 text-link" aria-hidden /></span>
+          <span className={tile}><Check aria-hidden /></span>
           <p className="text-[17px] font-semibold">Your profile</p>
         </div>
         {n.profile.map(([k, v]) => (
@@ -99,7 +99,7 @@ function Flow({ n, stacked = false }: { n: Need; stacked?: boolean }) {
 
       <div className={`${card} ${stacked ? "relative w-full p-5" : "absolute left-[360px] top-[500px] w-[360px] p-6"}`}>
         <div className="mb-2 flex items-center gap-3">
-          <span className={tile}><CalendarCheck className="size-4 text-link" aria-hidden /></span>
+          <span className={tile}><CalendarCheck aria-hidden /></span>
           <p className="text-[17px] font-semibold">12-month plan</p>
         </div>
         {n.plan.map(([t, m]) => (
@@ -157,34 +157,34 @@ export function Finds() {
     return () => window.clearTimeout(t);
   }, [active]);
   return (
-    <section id="finds" className="bg-background px-3 py-8 sm:px-6 lg:py-12">
+    <section id="finds" className="bg-section px-3 py-8 sm:px-6 lg:py-12">
       <div className="mx-auto max-w-[1180px]">
         <FadeUp className="mb-6 max-w-3xl px-1">
-          <p className="text-[12px] font-medium uppercase tracking-[0.08em] text-link">What it finds for you</p>
+          <p className="text-[12px] font-medium uppercase tracking-tight text-link">What it finds for you</p>
           <h2 className="mt-3 md-headline-medium font-medium! tracking-[-0.02em]! text-ink lg:md-headline-large">One continuous thread, whatever you need.</h2>
           <p className="mt-3 md-body-large text-ink-muted">Pick a situation and follow it from your words to a plan.</p>
         </FadeUp>
 
-        <FadeUp delay={100} className="flex flex-wrap items-stretch gap-6 rounded-card bg-surface p-4 sm:p-5 lg:flex-nowrap lg:gap-10 lg:p-5">
-          <div className="flex w-full flex-col justify-center lg:w-[31%] lg:shrink-0 lg:py-4 lg:pl-5">
+        <FadeUp delay={100} className="flex flex-wrap items-stretch gap-6 surface-card p-4 sm:p-5 lg:flex-nowrap lg:gap-10 lg:p-5">
+          <div className="flex w-full flex-col justify-center lg:w-[31%] lg:shrink-0 lg:py-4">
             <ul>
               {needs.map((x, i) => {
                 const Icon = x.icon;
                 const isActive = i === active;
                 return (
-                  <li key={x.label} className={isActive ? "" : "border-b border-line"}>
+                  <li key={x.label} className={`rounded-2xl transition-[background-color,box-shadow] duration-300 ${isActive ? "shadow-step bg-card" : "rounded-none border-b border-line last:border-b-0"}`}>
                     {isActive ? (
-                      <div className="py-5">
+                      <div className="px-5 py-5">
                         <div className="flex items-center gap-4">
-                          <span className="grid size-14 place-items-center rounded-badge bg-rhine-blue text-on-rhine-blue"><Icon className="size-6" aria-hidden /></span>
-                          <span className="md-title-large">{x.label}</span>
+                          <span className="icon-tile bg-rhine-blue! text-on-rhine-blue!"><Icon aria-hidden /></span>
+                          <span className="card-title text-ink">{x.label}</span>
                         </div>
-                        <p className="mt-4 md-body-large text-ink-muted">{x.desc}</p>
+                        <p className="mt-3 card-desc text-ink-muted">{x.desc}</p>
                         <div className="mt-6 h-[3px] rounded bg-line"><div key={active} className="need-progress h-full rounded bg-rhine-blue" /></div>
                       </div>
                     ) : (
-                      <button type="button" aria-expanded={false} onClick={() => setActive(i)} className="flex w-full items-center gap-4 py-4 text-left">
-                        <span className="grid size-11 shrink-0 place-items-center rounded-badge bg-background text-ink-muted"><Icon className="size-5 text-link" aria-hidden /></span>
+                      <button type="button" aria-expanded={false} onClick={() => setActive(i)} className="flex w-full items-center gap-4 px-5 py-4 text-left">
+                        <span className="icon-tile"><Icon aria-hidden /></span>
                         <span className="text-[18px] text-ink-muted">{x.label}</span>
                       </button>
                     )}
@@ -193,7 +193,7 @@ export function Finds() {
               })}
             </ul>
           </div>
-          <div className="flex min-w-0 flex-1 items-center rounded-card bg-background p-3 sm:p-5">
+          <div className="flex min-w-0 flex-1 items-center rounded-card bg-section p-3 sm:p-5">
             <div className="w-full sm:hidden"><Flow n={n} stacked /></div>
             <div className="hidden w-full sm:block"><FitFlow n={n} /></div>
           </div>

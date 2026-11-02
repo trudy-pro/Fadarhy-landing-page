@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <main className="min-h-screen bg-background font-sans text-ink">
+    <main className="min-h-screen bg-section font-sans text-ink">
       <Header />
       <Hero />
       <Support />

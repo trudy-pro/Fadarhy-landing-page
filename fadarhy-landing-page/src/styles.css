@@ -162,6 +162,61 @@
   font-weight: 500;
 }
 
+/* ── Card system ──────────────────────────────────────────────── */
+/* Shared by every content card. Text utilities set type only; pair them with a colour utility. */
+@utility surface-card {
+  border-radius: var(--radius-card);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-step);
+}
+/* On white sections the shadow alone disappears, so keep the grey border there. */
+.bg-surface .surface-card {
+  border: 1px solid var(--color-line);
+  box-shadow: none;
+}
+/* Soft rounded square holding a blue outline icon (or a short label like "#1"). */
+@utility icon-tile {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-badge);
+  background-color: var(--color-section);
+  color: var(--color-link);
+  & > svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke-width: 1.75;
+  }
+}
+@utility card-label {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+@utility card-title {
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+@utility card-stat {
+  font-size: clamp(1.75rem, 1.1rem + 1.4vw, 2.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: break-word;
+}
+@utility card-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
+}
+
 @custom-variant dark (&:is([data-theme="dark"] *));
 
 @theme inline {
@@ -195,6 +250,7 @@
   --color-ring: var(--ring);
 
   --color-surface: var(--surface);
+  --color-section: var(--section);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
   --color-ink-muted: var(--ink-muted);
@@ -280,6 +336,30 @@ body {
   background-color: var(--color-card);
   box-shadow: var(--shadow-card, none);
 }
+/* Primary button: default / hover / pressed / focus / disabled. */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  transition: background-color 150ms ease;
+}
+.btn-primary:hover {
+  background-color: var(--btn-primary-bg-hover);
+}
+.btn-primary:active {
+  background-color: var(--btn-primary-bg-active);
+}
+.btn-primary:focus-visible {
+  background-color: var(--btn-primary-bg);
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.btn-primary:disabled,
+.btn-primary[aria-disabled="true"] {
+  background-color: var(--btn-primary-bg-disabled);
+  color: var(--btn-primary-fg-disabled);
+  cursor: not-allowed;
+}
+
 .btn-shape {
   border-radius: var(--btn-radius, var(--radius));
   border-width: var(--btn-border-width, 1px);
@@ -462,6 +542,29 @@ section[id] { scroll-margin-top: 6.5rem; }
   from { width: 0%; }
   to { width: 100%; }
 }
+/* How it works: flat light-blue wash behind the white cards. */
+.aqua-section {
+  background-color: var(--aqua-wash);
+}
+.shadow-product { box-shadow: var(--shadow-product); }
+.shadow-step { box-shadow: var(--shadow-step); }
+
+/* Accordion panel that animates height via grid rows. */
+.step-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 300ms ease, opacity 200ms ease;
+}
+.step-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.step-panel > * { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .step-panel { transition: none; }
+}
+
 .need-progress {
   animation: need-progress 6s linear forwards;
 }

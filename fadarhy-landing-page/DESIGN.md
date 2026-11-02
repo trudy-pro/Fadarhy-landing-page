@@ -18,7 +18,7 @@ Centered hero, tab pills, product mockup with arrows, logo row, centered section
 Logo: typographic "Assemblio" wordmark with A glyph in SVG/CSS. No raster assets.
 
 ## Elevation & Depth
-Soft shadows on pills and mockup windows; cards have 2px light border with fade-out mockups.
+Soft shadows on pills and mockup windows; content cards are flat with a 1px light border, no shadow.
 
 ## Shapes
 Rounded 8-16px; pill tabs radius 12px.
@@ -26,6 +26,8 @@ Rounded 8-16px; pill tabs radius 12px.
 ## Components
 ### Primary flow
 Header "Schedule a demo" button and nav links; tabs switch the active industry.
+### Cards
+Every content card uses the shared utilities in `src/styles.css`: `surface-card` (12px radius, 1px line border, card background) with `p-6`, and an `icon-tile` (44px soft square, 12px radius, section background, blue 20px lucide outline icon at 1.75 stroke). Stack: icon → `card-label` (optional) → `card-title` or `card-stat` → `card-desc`. Text utilities set type only; add the colour (`text-ink` for titles, `text-link` for numbers, `text-ink-muted` for labels and descriptions).
 
 ## Do's and Don'ts
 Do keep violet as the only accent. Don't add gradients or glass.

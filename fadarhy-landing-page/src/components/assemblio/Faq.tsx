@@ -15,9 +15,9 @@ const faqs = [
 
 export function Faq() {
   return (
-    <section id="faq" className="bg-background px-4 py-20 lg:py-28">
+    <section id="faq" className="bg-section px-4 py-20 lg:py-28">
       <FadeUp className="mx-auto max-w-[820px] px-1 text-center">
-        <p className="text-[12px] font-medium uppercase tracking-[0.08em] text-link">FAQ</p>
+        <p className="text-[12px] font-medium uppercase tracking-tight text-link">FAQ</p>
         <h2 className="mt-3 md-headline-medium font-medium! tracking-[-0.02em]! text-ink lg:md-headline-large">FadäRhy FAQs</h2>
         <Accordion type="single" collapsible className="mt-8 text-left">
           {faqs.map((f, i) => (

@@ -28,6 +28,7 @@
   /* FadäRhy design-system tokens */
   --background: #F2F2F2;
   --surface: #FFFFFF;
+  --section: #F4F6FB;
   --line: #E4E4EA;
   --line-strong: #6B6B76;
   --ink: #2A2A2A;
@@ -37,6 +38,20 @@
   --on-rhine-blue: #FFFFFF;
   --link: #2446F5;
   --focus-ring: #2446F5;
+
+  /* Primary button states */
+  --btn-primary-bg: #2446F5;
+  --btn-primary-bg-hover: #1E3EDB;
+  --btn-primary-bg-active: #1935BE;
+  --btn-primary-fg: #FFFFFF;
+  --btn-primary-bg-disabled: #D8DFFF;
+  --btn-primary-fg-disabled: #6F7696;
+
+  /* Soft aqua wash for the How it works section; cards stay white on top */
+  --aqua-wash: #EEF6FB;
+
+  --shadow-product: 0 1px 2px rgba(16, 24, 40, 0.04), 0 12px 24px -8px rgba(16, 24, 40, 0.06), 0 32px 64px -24px rgba(36, 70, 245, 0.18);
+  --shadow-step: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px -12px rgba(16, 24, 40, 0.10);
 
   --error: #B42318;
   --error-soft: #FDECEA;
@@ -55,17 +70,17 @@
 
   /* shadcn names → design-system tokens */
   --foreground: var(--ink);
-  --card: var(--surface);
+  --card: #FFFFFF;
   --card-foreground: var(--ink);
   --popover: var(--surface);
   --popover-foreground: var(--ink);
   --primary: var(--rhine-blue);
   --primary-foreground: var(--on-rhine-blue);
-  --secondary: var(--background);
+  --secondary: var(--section);
   --secondary-foreground: var(--ink);
-  --muted: var(--background);
+  --muted: var(--section);
   --muted-foreground: var(--ink-muted);
-  --accent: var(--background);
+  --accent: var(--section);
   --accent-foreground: var(--ink);
   --destructive: var(--error);
   --destructive-foreground: #FFFFFF;
@@ -80,8 +95,10 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
+  --card: var(--surface);
   --background: #11120F;
   --surface: #1C1D19;
+  --section: var(--background);
   --line: #2E3029;
   --line-strong: #7B8073;
   --ink: #EEF0E8;
@@ -91,6 +108,18 @@
   --on-rhine-blue: #2A2A2A;
   --link: #D6FF3F;
   --focus-ring: #D6FF3F;
+
+  --btn-primary-bg: #D6FF3F;
+  --btn-primary-bg-hover: #C4EB2E;
+  --btn-primary-bg-active: #AFD21F;
+  --btn-primary-fg: #2A2A2A;
+  --btn-primary-bg-disabled: #2E3029;
+  --btn-primary-fg-disabled: #7B8073;
+
+  --aqua-wash: #121614;
+
+  --shadow-product: 0 1px 2px rgba(0, 0, 0, 0.3), 0 32px 64px -24px rgba(0, 0, 0, 0.6);
+  --shadow-step: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
 
   --error: #FF8A80;
   --error-soft: #3A1613;
